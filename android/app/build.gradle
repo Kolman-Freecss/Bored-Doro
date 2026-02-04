@@ -1,8 +1,25 @@
 apply plugin: 'com.android.application'
 
+def keystorePropertiesFile = file("keystore.properties")
+def hasReleaseSigning = keystorePropertiesFile.exists()
+def keystoreProperties = new Properties()
+if (hasReleaseSigning) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace "com.boreddoro.app"
     compileSdk rootProject.ext.compileSdkVersion
+    if (hasReleaseSigning) {
+        signingConfigs {
+            release {
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+    }
     defaultConfig {
         applicationId "com.boreddoro.app"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -20,6 +37,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (hasReleaseSigning) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 }
