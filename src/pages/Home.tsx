@@ -19,7 +19,7 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen className="ion-padding">
+      <IonContent className="ion-padding">
         <div className="app-wrap">
           <header className="header">
             <div className="header-row">

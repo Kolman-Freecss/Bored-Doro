@@ -36,8 +36,10 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
+  height: 100%;
   min-height: 100vh;
   font-family: var(--font);
   font-size: 1rem;
@@ -47,6 +49,26 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Ensure Ionic app and content fill viewport so content is visible in browser */
+#root {
+  height: 100%;
+}
+
+ion-app {
+  height: 100%;
+}
+
 ion-content {
   --background: var(--bg);
+}
+
+/* Ensure page and content take at least full viewport so content is visible in browser */
+.ion-page {
+  min-height: 100vh;
+  display: block;
+}
+
+/* Ionic content inner scroll host needs height so content is visible */
+ion-content .ion-content-scroll-host {
+  min-height: 100%;
 }
