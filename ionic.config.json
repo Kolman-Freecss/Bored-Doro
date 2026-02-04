@@ -1,0 +1,7 @@
+{
+  "name": "Bored Doro",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
